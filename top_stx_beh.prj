@@ -1,0 +1,6 @@
+verilog isim_temp "ipcore_dir/clkdiv.v"
+verilog isim_temp "sync_gen_1024x1080.v"
+verilog isim_temp "my_ram.v"
+verilog isim_temp "clk_div.v"
+verilog isim_temp "top.v"
+verilog isim_temp "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

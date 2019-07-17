@@ -1,0 +1,21 @@
+NET "clk50" LOC = A10;
+
+NET "vga_R" LOC = E12;
+NET "vga_G" LOC = B15;
+NET "vga_B" LOC = C15;
+NET "vga_h_sync" LOC = D14;
+NET "vga_v_sync" LOC = E15;
+
+// D1
+NET "led1" LOC = T9;
+// D3
+NET "led2" LOC = R9;
+
+NET "vga_B" IOSTANDARD = LVTTL;
+NET "vga_G" IOSTANDARD = LVTTL;
+NET "vga_h_sync" IOSTANDARD = LVTTL;
+NET "vga_R" IOSTANDARD = LVTTL;
+NET "vga_v_sync" IOSTANDARD = LVTTL;
+
+# NET "vga_B" SLEW = FAST;
+# NET "vga_B" OUT_TERM = UNTUNED_75;

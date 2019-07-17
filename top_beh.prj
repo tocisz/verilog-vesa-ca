@@ -1,0 +1,6 @@
+verilog work "ipcore_dir/clkdiv.v"
+verilog work "sync_gen_1024x1080.v"
+verilog work "my_ram.v"
+verilog work "clk_div.v"
+verilog work "top.v"
+verilog work "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"
