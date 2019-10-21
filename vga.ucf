@@ -1,10 +1,10 @@
 NET "clk50" LOC = A10;
 
-NET "vga_R" LOC = E12;
-NET "vga_G" LOC = B15;
-NET "vga_B" LOC = C15;
-NET "vga_h_sync" LOC = D14;
-NET "vga_v_sync" LOC = E15;
+NET "vga_R" LOC = P16;//E12;
+NET "vga_G" LOC = R16;//B15;
+NET "vga_B" LOC = T15;//C15;
+NET "vga_h_sync" LOC = T14;//D14;
+NET "vga_v_sync" LOC = R12;//E15;
 
 // D1
 NET "led1" LOC = T9;
