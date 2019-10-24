@@ -156,7 +156,7 @@ begin
   else // data
   begin
     read_debug_ram = 1'b1;
-    rgb = 3'b000;
+    rgb = 3'bXXX;
   end
 end
 
