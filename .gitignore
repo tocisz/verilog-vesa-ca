@@ -39,3 +39,5 @@ xst
 *.gise
 *.xise
 *.log
+*.ipf
+planAhead_*
