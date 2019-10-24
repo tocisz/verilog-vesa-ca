@@ -33,31 +33,55 @@ module top
 assign led1 = 1'b0;
 assign led2 = 1'b0;
 
-wire       debug_ram_clk;
 wire [9:0] debug_ram_addr;
 wire [7:0] debug_ram_data;
 
+wire clk108;
+wire clk108ps;
+clkdiv clkdiv
+(
+  .CLK_IN1(clk50),
+  .CLK_OUT1(clk108),
+  .CLK_OUT2(clk108ps),
+  .CLK_OUT3(clk50_dup)
+);
+
 binary_display display
 (
-    .clk50(clk50), 
+    .clk(clk108), 
     .vga_h_sync(vga_h_sync), 
     .vga_v_sync(vga_v_sync), 
     .vga_R(vga_R), 
     .vga_G(vga_G), 
     .vga_B(vga_B),
-	 .ram_clk(debug_ram_clk),
     .ram_addr(debug_ram_addr), 
     .ram_data(debug_ram_data)
 );
 
+wire slow_clk;
+clk_div
+#(
+ .BITS(18)
+)
+slow_one
+(
+ .clk_in(clk50_dup),
+ .clk_out(slow_clk) // ~191 Hz
+);
+
+reg [17:0] count;
+
+always @(posedge slow_clk)
+  count <= count + 1'b1;
+
 my_ram2 debug_ram (
-    .clk_a(1'b0),
-    .clk_b(debug_ram_clk),
-    .en_a(1'b0),
+    .clk_a(slow_clk),
+    .clk_b(clk108ps),
+    .en_a(1'b1),
     .en_b(1'b1),
-    .addr_a(10'b0),
+    .addr_a(count[17:8]),
     .addr_b(debug_ram_addr),
-    .data_in_a(8'b0),
+    .data_in_a(count[7:0]),
     .data_out_b(debug_ram_data)
 );
 

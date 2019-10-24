@@ -19,27 +19,15 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module binary_display(
-   input  wire clk50,
+   input  wire clk,
    output wire vga_h_sync,
    output wire vga_v_sync,
    output reg  vga_R,
    output reg  vga_G,
    output reg  vga_B,
-	output wire ram_clk,
 	output wire [9:0] ram_addr,
 	input  wire [7:0] ram_data
 );
-
-wire clk;
-wire clkps;
-clkdiv clkdiv
-(
-  .CLK_IN1(clk50),
-  .CLK_OUT1(clk),
-  .CLK_OUT2(clkps)
-);
-
-assign ram_clk = clkps;
 
 wire inDisplayArea;
 wire inPrefetchArea;
