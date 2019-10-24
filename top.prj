@@ -1,4 +1,5 @@
 verilog work "ipcore_dir/clkdiv.v"
 verilog work "sync_gen_1280x1024.v"
 verilog work "my_ram2.v"
+verilog work "binary_display.v"
 verilog work "top.v"
