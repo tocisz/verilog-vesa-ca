@@ -51,7 +51,7 @@ sync_gen_1280x1024 syncgen
   .vga_h_sync(vga_h_sync),
   .vga_v_sync(vga_v_sync),
    .inDisplayArea(inDisplayArea),
-   .inPrefetchArea(inPrefetchArea),
+   .inPrefetchArea(),
   .prefetchCounterX(CounterX),
   .counterY(CounterY)
 );
