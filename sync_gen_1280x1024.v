@@ -9,9 +9,9 @@
 // Project Name:
 // Target Devices:
 // Tool versions:
-// Description: 
+// Description:
 //////////////////////////////////////////////////////////////////////////////////
-module sync_gen_1024x1080(
+module sync_gen_1280x1024(
 	input  wire      clk,
 	output reg       vga_h_sync,
 	output reg       vga_v_sync,
@@ -22,7 +22,7 @@ module sync_gen_1024x1080(
 );
 
 reg [10:0] counterX; // aligned to sync signal
-`define FRONT_MARGIN 16
+`define FRONT_MARGIN 0
 
 /*
 STANDARD
@@ -80,12 +80,10 @@ end
 
 always @(posedge clk)
 begin
-	inDisplayArea <= prefetchCounterX >= 11'd 15 && prefetchCounterX < 11'd 1295
+	inDisplayArea <= prefetchCounterX >= (11'd0 + `FRONT_MARGIN) && prefetchCounterX < (11'd1280 + `FRONT_MARGIN)
 	                 && counterY < 11'd 1024;
 
    inPrefetchArea <= prefetchCounterX < 11'd 1280 && counterY < 11'd 1024;
 end
-
-
 
 endmodule
