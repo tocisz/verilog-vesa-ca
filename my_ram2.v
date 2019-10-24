@@ -128,7 +128,7 @@ wire _unused_ok = &{1'b0,
       .ENAWREN(en_a),            // 1-bit input: A port enable/Write enable input
       .REGCEA(1'b1),             // 1-bit input: A port register enable input
       .RSTA(1'b0),               // 1-bit input: A port set/reset input
-      .WEAWEL(2'b00),            // 2-bit input: A port write enable input XXX
+      .WEAWEL(2'b11),            // 2-bit input: A port write enable input
       // Port A Data: 16-bit (each) input: Port A data
       .DIADI({8'd0, data_in_a}),             // 16-bit input: A port data/LSB data input
       .DIPADIP(2'b00),         // 2-bit input: A port parity/LSB parity input
