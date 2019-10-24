@@ -35,6 +35,8 @@ assign led2 = 1'b0;
 
 wire [9:0] debug_ram_addr;
 wire [7:0] debug_ram_data;
+wire [9:0] test_ram_addr;
+wire [7:0] test_ram_data;
 
 wire clk108;
 wire clk108ps;
@@ -69,19 +71,22 @@ slow_one
  .clk_out(slow_clk) // ~191 Hz
 );
 
-reg [17:0] count;
+rolling_counter test
+(
+ .clk(slow_clk), 
+ .ram_addr(test_ram_addr), 
+ .ram_data(test_ram_data)
+);
 
-always @(posedge slow_clk)
-  count <= count + 1'b1;
 
 my_ram2 debug_ram (
     .clk_a(slow_clk),
     .clk_b(clk108ps),
     .en_a(1'b1),
     .en_b(1'b1),
-    .addr_a(count[17:8]),
+    .addr_a(test_ram_addr),
     .addr_b(debug_ram_addr),
-    .data_in_a(count[7:0]),
+    .data_in_a(test_ram_data),
     .data_out_b(debug_ram_data)
 );
 
