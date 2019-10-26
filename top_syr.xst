@@ -1,6 +1,9 @@
-set -tmpdir "/home/ise/VBoxShare/vesa-vled/xst/projnav.tmp"
-set -xsthdpdir "/home/ise/VBoxShare/vesa-vled/xst"
-run -compileonly yes
+set -tmpdir "xst/projnav.tmp"
+set -xsthdpdir "xst"
+run
+-ifn top.prj
+-ofn top
+-ofmt NGC
 -p xc6slx16-2-ftg256
 -top top
 -opt_mode Speed
@@ -48,4 +51,3 @@ run -compileonly yes
 -iob Auto
 -equivalent_register_removal YES
 -slice_utilization_ratio_maxmargin 5
--ifn top.prj
