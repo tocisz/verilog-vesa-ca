@@ -8,7 +8,6 @@ xst
 *.lso
 *.stx
 *.tfi
-*.xst
 *.html
 *.xwbt
 *.ncd
