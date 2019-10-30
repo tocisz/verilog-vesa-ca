@@ -26,12 +26,13 @@ module my_ram2(
   input [9:0] addr_a,
   input [9:0] addr_b,
   input  [7:0] data_in_a,
+  output [7:0] data_out_a,
   output [7:0] data_out_b
 );
 
 wire [7:0] not_connected1;
 wire [1:0] not_connected2;
-wire [15:0] not_connected3;
+wire [7:0] not_connected3;
 wire [1:0] not_connected4;
 
 wire _unused_ok = &{1'b0,
@@ -116,7 +117,7 @@ wire _unused_ok = &{1'b0,
    )
    RAMB8BWER_inst (
       // Port A Data: 16-bit (each) output: Port A data
-      .DOADO(not_connected3),             // 16-bit output: A port data/LSB data output
+      .DOADO({not_connected3, data_out_a}),             // 16-bit output: A port data/LSB data output
       .DOPADOP(not_connected2),         // 2-bit output: A port parity/LSB parity output
       // Port B Data: 16-bit (each) output: Port B data
       .DOBDO({not_connected1, data_out_b}),             // 16-bit output: B port data/MSB data output
@@ -125,10 +126,10 @@ wire _unused_ok = &{1'b0,
       // when RAM_MODE="SDP")
       .ADDRAWRADDR({addr_a, 3'b000}),      // 13-bit input: A port address/Write address input
       .CLKAWRCLK(clk_a),         // 1-bit input: A port clock/Write clock input
-      .ENAWREN(en_a),            // 1-bit input: A port enable/Write enable input
+      .ENAWREN(1'b1),            // 1-bit input: A port enable/Write enable input
       .REGCEA(1'b1),             // 1-bit input: A port register enable input
       .RSTA(1'b0),               // 1-bit input: A port set/reset input
-      .WEAWEL(2'b11),            // 2-bit input: A port write enable input
+      .WEAWEL({en_a,en_a}),            // 2-bit input: A port write enable input
       // Port A Data: 16-bit (each) input: Port A data
       .DIADI({8'd0, data_in_a}),             // 16-bit input: A port data/LSB data input
       .DIPADIP(2'b00),         // 2-bit input: A port parity/LSB parity input

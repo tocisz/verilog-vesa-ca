@@ -39,3 +39,9 @@ xst
 *.log
 *.ipf
 planAhead_*
+impact_*
+# Makefile uses top_bit.ut
+top.ut
+# Makefile uses top_syr.xst
+top.xst
+!serial/license.txt

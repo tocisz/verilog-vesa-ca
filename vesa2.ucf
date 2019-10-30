@@ -11,11 +11,14 @@ NET "led1" LOC = T9;
 // D3
 NET "led2" LOC = R9;
 
-NET "vga_B" IOSTANDARD = LVTTL;
-NET "vga_G" IOSTANDARD = LVTTL;
-NET "vga_h_sync" IOSTANDARD = LVTTL;
-NET "vga_R" IOSTANDARD = LVTTL;
-NET "vga_v_sync" IOSTANDARD = LVTTL;
+NET "ser_in" LOC = E13;
+NET "ser_out" LOC = B16;
+
+#NET "vga_B" IOSTANDARD = LVTTL;
+#NET "vga_G" IOSTANDARD = LVTTL;
+#NET "vga_h_sync" IOSTANDARD = LVTTL;
+#NET "vga_R" IOSTANDARD = LVTTL;
+#NET "vga_v_sync" IOSTANDARD = LVTTL;
 
 # NET "vga_B" SLEW = FAST;
 # NET "vga_B" OUT_TERM = UNTUNED_75;
