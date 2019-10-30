@@ -21,16 +21,42 @@
 module top
 (
    input  wire clk50,
+
    output wire vga_h_sync,
    output wire vga_v_sync,
    output wire vga_R,
    output wire vga_G,
    output wire vga_B,
+
    output wire led1,
    output wire led2,
+
 //input 			reset;			// global reset input
    input  wire ser_in,			// serial data input
-   output wire ser_out		// serial data output
+   output wire ser_out,		// serial data output
+
+    // SDRAM Interface
+    output          sdram_clk_o,
+    output          sdram_cke_o,
+    output          sdram_cs_o,
+    output          sdram_ras_o,
+    output          sdram_cas_o,
+    output          sdram_we_o,
+    output [1:0]    sdram_dqm_o,
+    output [12:0]   sdram_addr_o,
+    output [1:0]    sdram_ba_o,
+    inout [15:0]    sdram_data_io,
+
+    // Wishbone Interface (TO BE INTERNALIZED)
+    input           stb_i,
+    input           we_i,
+    input [3:0]     sel_i,
+    input           cyc_i,
+    input [31:0]    addr_i,
+    input [31:0]    data_i,
+    output [31:0]   data_o,
+    output          stall_o,
+    output          ack_o
 );
 
 assign led1 = 1'b1;
@@ -116,5 +142,48 @@ my_ram2 debug_ram (
     .data_out_b(debug_ram_data),
 	 .data_out_a(uart_rd_data_i)
 );
+
+/*
+// Wires for Wishbone (not used yet)
+wire            stb_i;
+wire            we_i;
+wire  [3:0]     sel_i;
+wire            cyc_i;
+wire  [31:0]    addr_i;
+wire  [31:0]    data_i;
+wire  [31:0]   data_o;
+wire           stall_o;
+wire           ack_o;
+*/
+
+sdram
+#(
+    .SDRAM_MHZ(50)
+)
+external_ram
+(
+    .clk_i(clk50_dup),
+    .rst_i(rst_i),
+    .stb_i(stb_i),
+    .we_i(we_i),
+    .sel_i(sel_i),
+    .cyc_i(cyc_i),
+    .addr_i(addr_i),
+    .data_i(data_i),
+    .data_o(data_o),
+    .stall_o(stall_o),
+    .ack_o(ack_o),
+    .sdram_clk_o(sdram_clk_o),
+    .sdram_cke_o(sdram_cke_o),
+    .sdram_cs_o(sdram_cs_o),
+    .sdram_ras_o(sdram_ras_o),
+    .sdram_cas_o(sdram_cas_o),
+    .sdram_we_o(sdram_we_o),
+    .sdram_dqm_o(sdram_dqm_o),
+    .sdram_addr_o(sdram_addr_o),
+    .sdram_ba_o(sdram_ba_o),
+    .sdram_data_io(sdram_data_io)
+);
+
 
 endmodule

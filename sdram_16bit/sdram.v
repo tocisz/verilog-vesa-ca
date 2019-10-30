@@ -12,9 +12,9 @@
 // for details.
 //-----------------------------------------------------------------
 //
-// This file is open source HDL; you can redistribute it and/or 
-// modify it under the terms of the GNU General Public License as 
-// published by the Free Software Foundation; either version 2 of 
+// This file is open source HDL; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of
 // the License, or (at your option) any later version.
 //
 // This file is distributed in the hope that it will be useful,
@@ -22,7 +22,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public 
+// You should have received a copy of the GNU General Public
 // License along with this file; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA
@@ -35,7 +35,7 @@ module sdram
 #(
     parameter    SDRAM_MHZ             = 50,
     parameter    SDRAM_ADDR_W          = 24,
-    parameter    SDRAM_COL_W           = 9,    
+    parameter    SDRAM_COL_W           = 9,
     parameter    SDRAM_BANK_W          = 2,
     parameter    SDRAM_DQM_W           = 2,
     parameter    SDRAM_BANKS           = 2 ** SDRAM_BANK_W,
@@ -59,12 +59,12 @@ module sdram
     input           we_i,
     input [3:0]     sel_i,
     input           cyc_i,
-    input [31:0]    addr_i,
+    input [31:0]    addr_i, // 9 bits unused (so addresses are word addresses?)
     input [31:0]    data_i,
     output [31:0]   data_o,
     output          stall_o,
     output          ack_o,
-    
+
     // SDRAM Interface
     output          sdram_clk_o,
     output          sdram_cke_o,
@@ -93,6 +93,10 @@ localparam CMD_LOAD_MODE     = 4'b0000;
 
 // Mode: Burst Length = 4 bytes, CAS=2
 localparam MODE_REG          = {3'b000,1'b0,2'b00,3'b010,1'b0,3'b001};
+ // programmed burst Length
+ // CAS latency 2 (XXX)
+ // burst type sequential
+ // burst length 2 (XXX)
 
 // SM states
 localparam STATE_W           = 4;
@@ -331,7 +335,7 @@ begin
     STATE_ACTIVATE :
     begin
         // tRCD (ACTIVATE -> READ / WRITE)
-        delay_r = SDRAM_TRCD_CYCLES;        
+        delay_r = SDRAM_TRCD_CYCLES;
     end
     //-----------------------------------------
     // STATE_READ_WAIT
@@ -346,8 +350,8 @@ begin
             // Open row hit
             if (row_open_q[addr_bank_w] && addr_row_w == active_row_q[addr_bank_w])
                 delay_r = 4'd0;
-        end        
-    end    
+        end
+    end
     //-----------------------------------------
     // STATE_PRECHARGE
     //-----------------------------------------
@@ -369,7 +373,7 @@ begin
     //-----------------------------------------
     STATE_DELAY:
     begin
-        delay_r = delay_q - 4'd1;  
+        delay_r = delay_q - 4'd1;
     end
     //-----------------------------------------
     // Others
@@ -466,7 +470,7 @@ begin
     data_q          <= 16'b0;
     addr_q          <= {SDRAM_ROW_W{1'b0}};
     bank_q          <= {SDRAM_BANK_W{1'b0}};
-    cke_q           <= 1'b0; 
+    cke_q           <= 1'b0;
     dqm_q           <= {SDRAM_DQM_W{1'b0}};
     data_rd_en_q    <= 1'b1;
     dqm_buffer_q    <= {SDRAM_DQM_W{1'b0}};
@@ -571,7 +575,7 @@ begin
         // Auto refresh
         command_q   <= CMD_REFRESH;
         addr_q      <= {SDRAM_ROW_W{1'b0}};
-        bank_q      <= {SDRAM_BANK_W{1'b0}};        
+        bank_q      <= {SDRAM_BANK_W{1'b0}};
     end
     //-----------------------------------------
     // STATE_READ
@@ -682,11 +686,11 @@ assign stall_o = ~(state_q == STATE_READ || state_q == STATE_WRITE0);
 //-----------------------------------------------------------------
 genvar i;
 
-generate 
+generate
 if (SDRAM_TARGET == "XILINX")
 begin
     // 180 degree phase delayed sdram clock output
-    ODDR2 
+    ODDR2
     #(
         .DDR_ALIGNMENT("NONE"),
         .INIT(1'b0),
@@ -704,9 +708,9 @@ begin
         .D1(1'b1)
     );
 
-    for (i=0; i < 16; i = i + 1) 
+    for (i=0; i < 16; i = i + 1)
     begin
-      IOBUF 
+      IOBUF
       #(
         .DRIVE(12),
         .IOSTANDARD("LVTTL"),

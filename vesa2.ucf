@@ -14,6 +14,88 @@ NET "led2" LOC = R9;
 NET "ser_in" LOC = E13;
 NET "ser_out" LOC = B16;
 
+//100M SDRAM Clock
+NET "sdram_clk_o" 			LOC = H1 	| IOSTANDARD = LVTTL;
+//SDCKE0
+NET "sdram_cke_o" 			LOC = J1 	| IOSTANDARD = LVTTL;
+//DQML
+NET "sdram_dqm_o[0]"			LOC = F3 	| IOSTANDARD = LVTTL;
+//DQMH
+NET "sdram_dqm_o[1]"			LOC = H2 	| IOSTANDARD = LVTTL;
+//CAS
+NET "sdram_cas_o" 				LOC = H3 	| IOSTANDARD = LVTTL;
+//RAS
+NET "sdram_ras_o" 				LOC = J4 	| IOSTANDARD = LVTTL;
+//SDWE
+NET "sdram_we_o" 				LOC = G3 	| IOSTANDARD = LVTTL;
+//SDCS0
+NET "sdram_cs_o" 			LOC = J3 	| IOSTANDARD = LVTTL;
+
+//sdram_data_io[0]
+NET "sdram_data_io[0]" 			LOC = A3 	| IOSTANDARD = LVTTL;
+//sdram_data_io[1]
+NET "sdram_data_io[1]" 			LOC = A2 	| IOSTANDARD = LVTTL;
+//sdram_data_io[2]
+NET "sdram_data_io[2]" 			LOC = B3 	| IOSTANDARD = LVTTL;
+//sdram_data_io[3]
+NET "sdram_data_io[3]" 			LOC = B2 	| IOSTANDARD = LVTTL;
+//sdram_data_io[4]
+NET "sdram_data_io[4]" 			LOC = C3 	| IOSTANDARD = LVTTL;
+//sdram_data_io[5]
+NET "sdram_data_io[5]" 			LOC = C2 	| IOSTANDARD = LVTTL;
+//sdram_data_io[6]
+NET "sdram_data_io[6]" 			LOC = D3 	| IOSTANDARD = LVTTL;
+//sdram_data_io[7]
+NET "sdram_data_io[7]" 			LOC = E3 	| IOSTANDARD = LVTTL;
+//sdram_data_io[8]
+NET "sdram_data_io[8]" 			LOC = G1 	| IOSTANDARD = LVTTL;
+//sdram_data_io[9]
+NET "sdram_data_io[9]" 			LOC = F1 	| IOSTANDARD = LVTTL;
+//sdram_data_io[10]
+NET "sdram_data_io[10]" 		LOC = F2 	| IOSTANDARD = LVTTL;
+//sdram_data_io[11]
+NET "sdram_data_io[11]" 		LOC = E1 	| IOSTANDARD = LVTTL;
+//sdram_data_io[12]
+NET "sdram_data_io[12]" 		LOC = E2 	| IOSTANDARD = LVTTL;
+//sdram_data_io[13]
+NET "sdram_data_io[13]" 		LOC = D1 	| IOSTANDARD = LVTTL;
+//sdram_data_io[14]
+NET "sdram_data_io[14]" 		LOC = C1 	| IOSTANDARD = LVTTL;
+//sdram_data_io[15]
+NET "sdram_data_io[15]" 		LOC = B1 	| IOSTANDARD = LVTTL;
+
+//sdram_addr_o[0]
+NET "sdram_addr_o[0]" 		LOC = L4 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[1]
+NET "sdram_addr_o[1]" 		LOC = M3 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[2]
+NET "sdram_addr_o[2]" 		LOC = M4 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[3]
+NET "sdram_addr_o[3]" 		LOC = N3 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[4]
+NET "sdram_addr_o[4]" 		LOC = R2 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[5]
+NET "sdram_addr_o[5]" 		LOC = R1 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[6]
+NET "sdram_addr_o[6]" 		LOC = P2 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[7]
+NET "sdram_addr_o[7]" 		LOC = P1 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[8]
+NET "sdram_addr_o[8]" 		LOC = N1 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[9]
+NET "sdram_addr_o[9]" 		LOC = M1 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[10]
+NET "sdram_addr_o[10]" 	LOC = L3 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[11]
+NET "sdram_addr_o[11]" 	LOC = L1 	| IOSTANDARD = LVTTL;
+//sdram_addr_o[12]
+NET "sdram_addr_o[12]" 	LOC = K1 	| IOSTANDARD = LVTTL;
+
+//sdram_ba_o[0]
+NET "sdram_ba_o[0]" 			LOC = K3 	| IOSTANDARD = LVTTL;
+//sdram_ba_o[1]
+NET "sdram_ba_o[1]" 			LOC = K2 	| IOSTANDARD = LVTTL;
+
 #NET "vga_B" IOSTANDARD = LVTTL;
 #NET "vga_G" IOSTANDARD = LVTTL;
 #NET "vga_h_sync" IOSTANDARD = LVTTL;
