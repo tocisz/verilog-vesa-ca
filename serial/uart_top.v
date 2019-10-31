@@ -13,8 +13,7 @@ module uart_top
 	rx_data, new_rx_data, 
 	tx_data, new_tx_data, tx_busy, 
 	// baud rate configuration register - see baud_gen.v for details 
-	baud_freq, baud_limit, 
-	baud_clk 
+	baud_freq, baud_limit
 );
 //---------------------------------------------------------------------------------------
 // modules inputs and outputs 
@@ -29,12 +28,10 @@ output	[7:0]	rx_data;		// data byte received
 output 			new_rx_data;	// signs that a new byte was received 
 input	[11:0]	baud_freq;	// baud rate setting registers - see header description 
 input	[15:0]	baud_limit;
-output			baud_clk;
 
 // internal wires 
 wire ce_16;		// clock enable at bit rate 
 
-assign baud_clk = ce_16;
 //---------------------------------------------------------------------------------------
 // module implementation 
 // baud rate generator module 

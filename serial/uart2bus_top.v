@@ -50,7 +50,6 @@ wire	[7:0]	rx_data;		// data byte received
 wire 			new_rx_data;	// signs that a new byte was received 
 wire	[11:0]	baud_freq;
 wire	[15:0]	baud_limit;
-wire			baud_clk;
 
 //---------------------------------------------------------------------------------------
 // module implementation 
@@ -61,8 +60,7 @@ uart_top uart1
 	.ser_in(ser_in), .ser_out(ser_out),
 	.rx_data(rx_data), .new_rx_data(new_rx_data), 
 	.tx_data(tx_data), .new_tx_data(new_tx_data), .tx_busy(tx_busy), 
-	.baud_freq(baud_freq), .baud_limit(baud_limit),
-	.baud_clk(baud_clk) 
+	.baud_freq(baud_freq), .baud_limit(baud_limit)
 );
 
 // assign baud rate default values 
