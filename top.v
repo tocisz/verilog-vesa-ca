@@ -64,14 +64,15 @@ binary_display display
 );
 
 wire  [15:0]	uart_address_o;	// address bus to register file
-wire	[7:0]	  uart_wr_data_o;	// write data to register file
-wire	[7:0]	  uart_rd_data_i;	// write data to register file
+wire	[7:0]	  uart_write_data_o;	// write data to register file
+wire	[7:0]	  uart_read_data_i;	// write data to register file
 wire			uart_write_o;		// write control to register file
 wire			uart_read_o;		// read control to register file
 wire			uart_req_o;		// bus access request signal
 wire      uart_gnt_i;
 
 wire [9:0] sram_address;
+wire [7:0] sram_read_data;
 wire [7:0] sram_write_data;
 wire       sram_write_enable;
 
@@ -79,13 +80,15 @@ uart_sram_bridge bridge (
     .clk50_dup(clk50_dup),
 
     .uart_address(uart_address_o),
-    .uart_wr_data(uart_wr_data_o),
+    .uart_write_data(uart_write_data_o),
+    .uart_read_data(uart_read_data_i),
     .uart_write(uart_write_o),
     .uart_read(uart_read_o),
     .uart_req(uart_req_o),
     .uart_gnt(uart_gnt_i),
 
     .sram_address(sram_address),
+    .sram_read_data(sram_read_data),
     .sram_write_data(sram_write_data),
     .sram_write_enable(sram_write_enable)
 );
@@ -97,9 +100,9 @@ uart2bus_top uart1 (
  .ser_out(ser_out),
 
  .int_address(uart_address_o),
- .int_wr_data(uart_wr_data_o),
+ .int_wr_data(uart_write_data_o),
  .int_write(uart_write_o),
- .int_rd_data(uart_rd_data_i),
+ .int_rd_data(uart_read_data_i),
  .int_read(uart_read_o),
  .int_req(uart_req_o),
  .int_gnt(uart_gnt_i)
@@ -114,7 +117,7 @@ my_ram2 debug_ram (
     .addr_b(debug_ram_addr),
     .data_in_a(sram_write_data),
     .data_out_b(debug_ram_data),
-	 .data_out_a(uart_rd_data_i)
+	  .data_out_a(sram_read_data)
 );
 
 endmodule

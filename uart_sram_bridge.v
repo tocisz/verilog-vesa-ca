@@ -24,20 +24,24 @@ module uart_sram_bridge
   parameter LATCH_DELAY_W = 1
 )
 (
-   input clk50_dup,
+  input  wire clk50_dup,
 
-	input	[15:0]	uart_address,	// address bus to register file
-	input	[7:0]	uart_wr_data,	// write data to register file
-	input			uart_write,		// write control to register file
-	input			uart_read,		// read control to register file
-	//output	[7:0]	int_rd_data,	// data read from register file
-	input			uart_req,		// bus access request signal
-	output		uart_gnt,		// bus access grant signal
+	input	 wire [15:0] uart_address,	// address bus to register file
+  output wire  [7:0] uart_read_data,	// write data to register file
+	input	 wire  [7:0] uart_write_data,	// write data to register file
+	input	 wire        uart_write,		// write control to register file
+	input	 wire        uart_read,		// read control to register file
+	input  wire        uart_req,		// bus access request signal
+	output wire        uart_gnt,		// bus access grant signal
 
-	output reg [9:0] sram_address,
-	output reg [7:0] sram_write_data,
-	output wire      sram_write_enable
+	output reg  [9:0] sram_address,
+  input  wire [7:0] sram_read_data,
+	output reg  [7:0] sram_write_data,
+	output wire       sram_write_enable
 );
+
+// as for now - hardwire uart to memory
+assign uart_read_data = sram_read_data;
 
 wire write_req_granted;
 assign write_req_granted = uart_write & uart_gnt;
@@ -64,7 +68,7 @@ begin
   end
   if (write_req_granted)
   begin // latch data and address on write_req_granted signal
-	 sram_write_data <= uart_wr_data;
+	 sram_write_data <= uart_write_data;
   end
 end
 
