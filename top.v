@@ -76,7 +76,7 @@ wire [7:0] sram_read_data;
 wire [7:0] sram_write_data;
 wire       sram_write_enable;
 
-uart_sram_bridge bridge (
+uart_sram_bridge bridge0 (
     .clk50_dup(clk50_dup),
 
     .uart_address(uart_address_o),
