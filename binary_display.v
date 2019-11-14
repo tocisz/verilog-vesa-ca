@@ -75,20 +75,24 @@ end
 
 reg [7:0] colCnt;
 
-reg colCntInc;
-reg [10:0] colCnt_iteration; // virtual register
-always_comb begin
-  colCntInc = 0;
-  for (colCnt_iteration = 0; colCnt_iteration <= 11'd1152; colCnt_iteration = colCnt_iteration + 11'd72)
-  begin
-    if (CounterX == colCnt_iteration && CounterX != 11'd72)
-      colCntInc = 1;
-  end
-end
-
 always @(posedge clk)
 begin
-  if (colCntInc)
+if (CounterX == 11'd0
+ || CounterX == 11'd144
+ || CounterX == 11'd216
+ || CounterX == 11'd288
+ || CounterX == 11'd360
+ || CounterX == 11'd432
+ || CounterX == 11'd504
+ || CounterX == 11'd576
+ || CounterX == 11'd648
+ || CounterX == 11'd720
+ || CounterX == 11'd792
+ || CounterX == 11'd864
+ || CounterX == 11'd936
+ || CounterX == 11'd1008
+ || CounterX == 11'd1080
+ || CounterX == 11'd1152)
   begin
      if (blockX == 8'd0)
       colCnt <= 8'd0;
