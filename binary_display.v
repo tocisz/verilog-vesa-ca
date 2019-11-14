@@ -1,21 +1,21 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date:    13:45:07 03/23/2019 
-// Design Name: 
-// Module Name:    binary_display 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
+// Company:
+// Engineer:
 //
-// Dependencies: 
+// Create Date:    13:45:07 03/23/2019
+// Design Name:
+// Module Name:    binary_display
+// Project Name:
+// Target Devices:
+// Tool versions:
+// Description:
 //
-// Revision: 
+// Dependencies:
+//
+// Revision:
 // Revision 0.01 - File Created
-// Additional Comments: 
+// Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
 module binary_display(
@@ -53,10 +53,12 @@ assign blockY = CounterY[10:3];
 
 reg [3:0] bXmod9;
 reg       bYmod2;
+reg [7:0] _bXmod9;
 always @*
 begin
-  bXmod9 = blockX % 9; // 37 / 88 /37
-  bYmod2 = blockY % 2; // 37 / 88 /37
+  _bXmod9 = blockX % 9; // 37 / 88 /37
+  bXmod9  = _bXmod9[3:0];
+  bYmod2 = blockY[0]; // 37 / 88 /37
 end
 
 reg [7:0] rowCnt;
@@ -72,27 +74,23 @@ begin
 end
 
 reg [7:0] colCnt;
+
+reg colCntInc;
+reg [10:0] colCnt_iteration; // virtual register
+always_comb begin
+  colCntInc = 0;
+  for (colCnt_iteration = 0; colCnt_iteration <= 11'd1152; colCnt_iteration = colCnt_iteration + 11'd72)
+  begin
+    if (CounterX == colCnt_iteration && CounterX != 11'd72)
+      colCntInc = 1;
+  end
+end
+
 always @(posedge clk)
 begin
-  if (CounterX == 11'd0
-    || CounterX == 11'd144
-    || CounterX == 11'd216
-    || CounterX == 11'd288
-    || CounterX == 11'd360
-    || CounterX == 11'd432
-    || CounterX == 11'd504
-    || CounterX == 11'd576
-    || CounterX == 11'd648
-    || CounterX == 11'd720
-    || CounterX == 11'd792
-    || CounterX == 11'd864
-    || CounterX == 11'd936
-    || CounterX == 11'd1008
-    || CounterX == 11'd1080
-    || CounterX == 11'd1152
-    )
+  if (colCntInc)
   begin
-     if (blockX == 7'd0)
+     if (blockX == 8'd0)
       colCnt <= 8'd0;
     else
    colCnt <= colCnt + 1'b1;

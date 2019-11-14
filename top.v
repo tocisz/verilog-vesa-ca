@@ -38,6 +38,8 @@ assign led2 = 1'b1;
 
 wire clk108;
 wire clk108ps;
+wire clk50_dup;
+wire clk50ps;
 clkdiv clkdiv
 (
   .CLK_IN1(clk50),

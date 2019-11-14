@@ -22,7 +22,7 @@ module sync_gen_1280x1024(
 );
 
 reg [10:0] counterX; // aligned to sync signal
-`define FRONT_MARGIN 0
+localparam  FRONT_MARGIN = 0;
 
 /*
 STANDARD
@@ -60,7 +60,7 @@ begin
 		counterY <= counterY + 1'b1;
 end
 
-wire [10:0] xShift     = 112 + 248 - `FRONT_MARGIN;
+wire [10:0] xShift     = 112 + 248 - FRONT_MARGIN;
 // wire [10:0] hSyncStart = 248 + 1280 + 48;
 always @(posedge clk)
 begin
@@ -80,8 +80,10 @@ end
 
 always @(posedge clk)
 begin
-	inDisplayArea <= prefetchCounterX >= (11'd0 + `FRONT_MARGIN) && prefetchCounterX < (11'd1280 + `FRONT_MARGIN)
+  /* verilator lint_off UNSIGNED */ // because FRONT_MARGIN may be 0
+	inDisplayArea <= prefetchCounterX >= (11'd0 + FRONT_MARGIN) && prefetchCounterX < (11'd1280 + FRONT_MARGIN)
 	                 && counterY < 11'd 1024;
+  /* verilator lint_on UNSIGNED */
 
    inPrefetchArea <= prefetchCounterX < 11'd 1280 && counterY < 11'd 1024;
 end

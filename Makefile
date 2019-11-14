@@ -1,5 +1,8 @@
 all: top.syr top.ngd top_map.ncd top.ncd top.bit
 
+lint:
+	verilator --lint-only -Iverilator_stubs -Iserial verilator.vlt top.v
+
 top.stx: top_stx.xst
 	xst -intstyle ise -ifn $^ -ofn $@
 
