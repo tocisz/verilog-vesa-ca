@@ -5,11 +5,11 @@
 //
 // Create Date:    16:26:10 02/21/2019
 // Design Name:
-// Module Name:    sync_gen_1024x1080
+// Module Name:    sync_gen_1280x1024
 // Project Name:
 // Target Devices:
 // Tool versions:
-// Description:
+// Description: 
 //////////////////////////////////////////////////////////////////////////////////
 module sync_gen_1280x1024(
 	input  wire      clk,
@@ -75,7 +75,7 @@ end
 
 always @(posedge vga_h_sync)
 begin
-	vga_v_sync <= counterY >= 11'd 1056 && counterY < 11'd 1059;
+	vga_v_sync <= counterY >= 11'd 1025 && counterY < 11'd 1028;
 end
 
 always @(posedge clk)
