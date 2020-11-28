@@ -75,7 +75,7 @@ end
 
 always @(posedge vga_h_sync)
 begin
-	vga_v_sync <= counterY >= 11'd 1056 && counterY < 11'd 1059;
+	vga_v_sync <= counterY >= 11'd 1025 && counterY < 11'd 1028;
 end
 
 always @(posedge clk)

@@ -36,12 +36,12 @@ initial begin
 	waddr = 8'b0;
 end
 
-always @ ( posedge clk )
+always @(posedge clk)
 begin
 	if (cycle != 8'd 160)
 	begin
 		if (cycle == position[10:4])
-			wdata <= (1 << 15-position[3:0]);
+			wdata <= (16'b1 << 15-position[3:0]);
 		else
 			wdata <= 16'b0;
 		write <= 1;

@@ -29,24 +29,21 @@ module top
 	 output wire led2
 );
 
-wire clk;
-wire clkps;
+wire clk; // main clock 108.33 MHz
+wire clkps; // negated clock (phase shift by 180 deg)
 clkdiv clkdiv
 (
-	.CLK_IN1(clk50),
+	.CLK_IN1(clk50), // onboard clock: 50MHz
 	.CLK_OUT1(clk),
 	.CLK_OUT2(clkps)
 );
 
-wire bout;
-clk_div #(25) blink
-(
-	.clk_in(clk),
-	.clk_out(bout)
-);
-assign led1 = bout;
-assign led2 = bout;
+assign led1 = 0;
+assign led2 = 0;
 
+/*
+Syncgen module is responsible for generating VESA timings
+ */
 wire inDisplayArea;
 wire inPrefetchArea;
 wire [10:0] CounterX;
@@ -56,7 +53,7 @@ sync_gen_1024x1080 syncgen
 	.clk(clk),
 	.vga_h_sync(vga_h_sync),
 	.vga_v_sync(vga_v_sync),
-   .inDisplayArea(inDisplayArea),
+   .inDisplayArea(inDisplayArea), // set when RGB data needs to be output
    .inPrefetchArea(inPrefetchArea),
 	.prefetchCounterX(CounterX),
 	.counterY(CounterY)
