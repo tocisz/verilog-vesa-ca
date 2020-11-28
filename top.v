@@ -48,7 +48,7 @@ wire inDisplayArea;
 wire inPrefetchArea;
 wire [10:0] CounterX;
 wire [10:0] CounterY;
-sync_gen_1024x1080 syncgen
+sync_gen_1280x1024 syncgen
 (
 	.clk(clk),
 	.vga_h_sync(vga_h_sync),

@@ -5,13 +5,13 @@
 //
 // Create Date:    16:26:10 02/21/2019
 // Design Name:
-// Module Name:    sync_gen_1024x1080
+// Module Name:    sync_gen_1280x1024
 // Project Name:
 // Target Devices:
 // Tool versions:
 // Description: 
 //////////////////////////////////////////////////////////////////////////////////
-module sync_gen_1024x1080(
+module sync_gen_1280x1024(
 	input  wire      clk,
 	output reg       vga_h_sync,
 	output reg       vga_v_sync,
